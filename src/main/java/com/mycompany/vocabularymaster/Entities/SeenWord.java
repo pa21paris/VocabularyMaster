@@ -4,7 +4,7 @@
  */
 package com.mycompany.vocabularymaster.Entities;
 
-import Utils.ResultEnum;
+import com.mycompany.vocabularymaster.utils.ResultEnum;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import java.time.LocalDate;

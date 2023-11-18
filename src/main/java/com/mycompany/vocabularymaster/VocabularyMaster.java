@@ -4,10 +4,7 @@
 
 package com.mycompany.vocabularymaster;
 
-import Utils.ResultEnum;
-import com.mycompany.vocabularymaster.Entities.SeenWord;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import com.mycompany.vocabularymaster.swing.MainFrame;
 
 /**
  *
@@ -16,7 +13,7 @@ import org.hibernate.cfg.Configuration;
 public class VocabularyMaster {
 
     public static void main(String[] args) {
-        var prueba = new SeenWord("Pepe", ResultEnum.GUESSED);
+        java.awt.EventQueue.invokeLater(() -> new MainFrame().setVisible(true));
         
     }
 }
