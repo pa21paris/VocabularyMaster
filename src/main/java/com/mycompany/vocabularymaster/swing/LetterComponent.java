@@ -5,7 +5,6 @@
 package com.mycompany.vocabularymaster.swing;
 
 import java.awt.Color;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,26 +35,29 @@ public class LetterComponent extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
 
-        setLayout(null);
+        setMaximumSize(new java.awt.Dimension(30, 36));
+        setMinimumSize(new java.awt.Dimension(30, 36));
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
 
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jTextField1.setMaximumSize(new java.awt.Dimension(30, 30));
+        jTextField1.setMinimumSize(new java.awt.Dimension(30, 30));
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField1KeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField1KeyTyped(evt);
             }
         });
         add(jTextField1);
-        jTextField1.setBounds(0, 0, 20, 22);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setMaximumSize(new java.awt.Dimension(30, 5));
+        jPanel1.setMinimumSize(new java.awt.Dimension(30, 5));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -63,23 +65,25 @@ public class LetterComponent extends javax.swing.JPanel {
         );
 
         add(jPanel1);
-        jPanel1.setBounds(0, 20, 20, 5);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-        if(jTextField1.getText().equals(Character.toString(this.letter))){
-            jTextField1.setBackground(Color.GREEN);
-            isCorrect = true;
-        }else{
-            jTextField1.setBackground(Color.WHITE);
-            isCorrect = false;
-        }
-    }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
         jTextField1.setText("");
     }//GEN-LAST:event_jTextField1KeyTyped
 
+    public boolean validateAnswer(){
+        String lowerCaseGivenAnswer = jTextField1.getText().toLowerCase();
+        String lowerCaseCorrectAnswer = Character.toString(this.letter).toLowerCase();
+        if(lowerCaseGivenAnswer.equals(lowerCaseCorrectAnswer)){
+            jTextField1.setBackground(Color.GREEN);
+            isCorrect = true;
+        }else{
+            jTextField1.setBackground(Color.RED);
+            isCorrect = false;
+        }
+        return isCorrect;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;

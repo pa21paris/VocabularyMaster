@@ -4,8 +4,11 @@
  */
 package com.mycompany.vocabularymaster.swing;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -39,6 +42,9 @@ public class HomePagePanel extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Learn new vocabulary");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel2MouseEntered(evt);
             }
@@ -104,6 +110,13 @@ public class HomePagePanel extends javax.swing.JPanel {
     private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
         jLabel3.setForeground(Color.BLACK);
     }//GEN-LAST:event_jLabel3MouseExited
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        var frame = (JFrame) SwingUtilities.getRoot(this);
+        frame.getContentPane().add(new GuessWordPanel("Pepe"));
+        ((CardLayout)frame.getContentPane().getLayout()).next(frame.getContentPane());
+        frame.pack();
+    }//GEN-LAST:event_jLabel2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
