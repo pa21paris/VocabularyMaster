@@ -68,7 +68,7 @@ public class LetterComponent extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
-        jTextField1.setText("");
+        if(jTextField1.isEditable()) jTextField1.setText("");
     }//GEN-LAST:event_jTextField1KeyTyped
 
     public boolean validateAnswer(){
@@ -76,6 +76,7 @@ public class LetterComponent extends javax.swing.JPanel {
         String lowerCaseCorrectAnswer = Character.toString(this.letter).toLowerCase();
         if(lowerCaseGivenAnswer.equals(lowerCaseCorrectAnswer)){
             jTextField1.setBackground(Color.GREEN);
+            jTextField1.setEditable(false);
             isCorrect = true;
         }else{
             jTextField1.setBackground(Color.RED);

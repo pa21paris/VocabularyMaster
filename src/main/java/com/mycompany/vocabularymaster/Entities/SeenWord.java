@@ -26,7 +26,6 @@ public final class SeenWord {
 
     public SeenWord(String word, ResultEnum result) {
         this.word = word;
-        this.lastTimeSeen = LocalDate.now();
         this.updateWordData(result);
     }
     
@@ -54,6 +53,11 @@ public final class SeenWord {
 
     public int getDaySpan() {
         return daySpan;
+    }
+
+    @Override
+    public String toString() {
+        return "SeenWord{" + "word=" + word + ", lastTimeSeen=" + lastTimeSeen + ", revisionDay=" + revisionDay + ", daySpan=" + daySpan + '}';
     }
     
 }

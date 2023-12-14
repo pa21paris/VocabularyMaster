@@ -114,9 +114,11 @@ public class HomePagePanel extends javax.swing.JPanel {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         var frame = (JFrame) SwingUtilities.getRoot(this);
+        var contentPane = frame.getContentPane();
+        var cardLayout = (CardLayout) contentPane.getLayout();
         var word = ApiHandler.getRandomWord();
-        frame.getContentPane().add(new GuessWordPanel(word));
-        ((CardLayout)frame.getContentPane().getLayout()).next(frame.getContentPane());
+        contentPane.add(new GuessWordPanel(word));
+        cardLayout.next(contentPane);
         frame.pack();
     }//GEN-LAST:event_jLabel2MouseClicked
 

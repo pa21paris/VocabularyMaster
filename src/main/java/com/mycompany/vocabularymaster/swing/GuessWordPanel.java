@@ -4,9 +4,14 @@
  */
 package com.mycompany.vocabularymaster.swing;
 
+import com.mycompany.vocabularymaster.Entities.SeenWord;
+import com.mycompany.vocabularymaster.utils.ResultEnum;
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -15,14 +20,26 @@ import java.util.Random;
 public class GuessWordPanel extends javax.swing.JPanel {
     
     private String word;
+    private SeenWord seenWord;
     private List<LetterComponent> letterComponents;
 
     /**
      * Creates new form GuessWordPanel
+     * @param word
      */
     public GuessWordPanel(String word) {
         initComponents();
         this.word = word;
+        this.seenWord = null;
+        this.letterComponents = new ArrayList<>();
+        printLetters();
+        setInitialLetters();
+    }
+    
+    public GuessWordPanel(SeenWord word) {
+        initComponents();
+        this.word = word.getWord();
+        this.seenWord = word;
         this.letterComponents = new ArrayList<>();
         printLetters();
         setInitialLetters();
@@ -43,10 +60,8 @@ public class GuessWordPanel extends javax.swing.JPanel {
     
     private void setInitialLetters(){
         var lettersToBeShown = getIndexesToBeShown();
-        
         for(int i : lettersToBeShown)
             letterComponents.get(i).setAsInitialLetter();
-            
     }
 
     /**
@@ -58,15 +73,15 @@ public class GuessWordPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        mainLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lettersPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        forfeitButton = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
+        verifyButton = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setText("Guess the word");
+        mainLabel.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        mainLabel.setText("Guess the word");
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -74,14 +89,24 @@ public class GuessWordPanel extends javax.swing.JPanel {
         lettersPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 43));
         jScrollPane1.setViewportView(lettersPanel);
 
-        jButton1.setText("Forfeit");
-
-        jButton2.setText("Exit");
-
-        jButton3.setText("Verify");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        forfeitButton.setText("Forfeit");
+        forfeitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                forfeitButtonActionPerformed(evt);
+            }
+        });
+
+        exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
+
+        verifyButton.setText("Verify");
+        verifyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verifyButtonActionPerformed(evt);
             }
         });
 
@@ -96,38 +121,63 @@ public class GuessWordPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(103, 103, 103)
-                        .addComponent(jLabel1)
+                        .addComponent(mainLabel)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(forfeitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(76, 76, 76)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(verifyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(mainLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(verifyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(forfeitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void verifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verifyButtonActionPerformed
+        boolean isWordCorrect = true;
         for(var c : this.letterComponents){
-            c.validateAnswer();
-        }                
-    }//GEN-LAST:event_jButton3ActionPerformed
+            isWordCorrect = c.validateAnswer() && isWordCorrect;
+        }
+        if(isWordCorrect){
+            forfeitButton.setEnabled(false);
+            verifyButton.setEnabled(false);
+            mainLabel.setText("You've guessed it!");
+            if(seenWord == null) seenWord = new SeenWord(word, ResultEnum.GUESSED);
+            else seenWord.updateWordData(ResultEnum.GUESSED);
+        }
+    }//GEN-LAST:event_verifyButtonActionPerformed
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        var frame = (JFrame) SwingUtilities.getRoot(this);
+        var contentPane = frame.getContentPane();
+        var cardLayout = (CardLayout) contentPane.getLayout();
+        cardLayout.previous(contentPane);
+        contentPane.remove(this);
+    }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void forfeitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forfeitButtonActionPerformed
+        if(seenWord == null) seenWord = new SeenWord(word, ResultEnum.SURRENDERED);
+        else seenWord.updateWordData(ResultEnum.SURRENDERED);
+        forfeitButton.setEnabled(false);
+        verifyButton.setEnabled(false);
+        mainLabel.setText("The answer was...");
+        for(var letterComponent : letterComponents) letterComponent.setAsInitialLetter();
+    }//GEN-LAST:event_forfeitButtonActionPerformed
 
     private void printLetters(){
         for (char c : this.word.toCharArray()) {
@@ -138,11 +188,11 @@ public class GuessWordPanel extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton exitButton;
+    private javax.swing.JButton forfeitButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel lettersPanel;
+    private javax.swing.JLabel mainLabel;
+    private javax.swing.JButton verifyButton;
     // End of variables declaration//GEN-END:variables
 }
