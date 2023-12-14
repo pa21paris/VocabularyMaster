@@ -6,6 +6,7 @@ package com.mycompany.vocabularymaster.swing;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -24,6 +25,28 @@ public class GuessWordPanel extends javax.swing.JPanel {
         this.word = word;
         this.letterComponents = new ArrayList<>();
         printLetters();
+        setInitialLetters();
+    }
+    
+    private int[] getIndexesToBeShown(){
+        int quantityOfLetters = (int)Math.ceil(word.length()/3.0);
+        var randomGenerator = new Random();
+        int[] res;
+        do{
+            res = randomGenerator
+                .ints(quantityOfLetters, 0, word.length())
+                .distinct()
+                .toArray();
+        }while(res.length != quantityOfLetters);
+        return res;
+    }
+    
+    private void setInitialLetters(){
+        var lettersToBeShown = getIndexesToBeShown();
+        
+        for(int i : lettersToBeShown)
+            letterComponents.get(i).setAsInitialLetter();
+            
     }
 
     /**

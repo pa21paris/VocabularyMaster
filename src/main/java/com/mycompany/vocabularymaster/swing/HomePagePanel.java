@@ -4,6 +4,7 @@
  */
 package com.mycompany.vocabularymaster.swing;
 
+import com.mycompany.vocabularymaster.utils.ApiHandler;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -113,7 +114,8 @@ public class HomePagePanel extends javax.swing.JPanel {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         var frame = (JFrame) SwingUtilities.getRoot(this);
-        frame.getContentPane().add(new GuessWordPanel("Pepe"));
+        var word = ApiHandler.getRandomWord();
+        frame.getContentPane().add(new GuessWordPanel(word));
         ((CardLayout)frame.getContentPane().getLayout()).next(frame.getContentPane());
         frame.pack();
     }//GEN-LAST:event_jLabel2MouseClicked

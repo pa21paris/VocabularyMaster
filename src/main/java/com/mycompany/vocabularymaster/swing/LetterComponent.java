@@ -84,6 +84,12 @@ public class LetterComponent extends javax.swing.JPanel {
         return isCorrect;
     }
     
+    public void setAsInitialLetter(){
+        jTextField1.setText(Character.toString(letter));
+        jTextField1.setBackground(Color.GREEN);
+        jTextField1.setEditable(false);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;

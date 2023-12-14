@@ -17,6 +17,8 @@ import java.net.http.HttpResponse;
  */
 public class ApiHandler {
     
+    private static final String API_KEY = "SglAKP8N3zsRPWy0jJqoxg==vWdMl4bQtMYCtsMC";
+    
     public static String getRandomWord(){
         String response = "";
         try {
@@ -24,7 +26,7 @@ public class ApiHandler {
                 .newBuilder()
                 .uri(new URI("https://api.api-ninjas.com/v1/randomword"))
                 .GET()
-                .header("X-Api-Key", "SglAKP8N3zsRPWy0jJqoxg==vWdMl4bQtMYCtsMC")
+                .header("X-Api-Key", API_KEY)
                 .build();
             var client = HttpClient.newHttpClient();
             var httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
