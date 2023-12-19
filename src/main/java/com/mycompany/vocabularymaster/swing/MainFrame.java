@@ -9,7 +9,6 @@ package com.mycompany.vocabularymaster.swing;
  * @author papar
  */
 public class MainFrame extends javax.swing.JFrame {
-
     /**
      * Creates new form HomePage
      */

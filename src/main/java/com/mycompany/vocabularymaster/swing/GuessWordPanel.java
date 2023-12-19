@@ -5,6 +5,7 @@
 package com.mycompany.vocabularymaster.swing;
 
 import com.mycompany.vocabularymaster.Entities.SeenWord;
+import com.mycompany.vocabularymaster.utils.HibernateHandler;
 import com.mycompany.vocabularymaster.utils.ResultEnum;
 import java.awt.CardLayout;
 import java.util.ArrayList;
@@ -147,19 +148,21 @@ public class GuessWordPanel extends javax.swing.JPanel {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    private void setFinalScreen(String finalWords){
+        forfeitButton.setEnabled(false);
+        verifyButton.setEnabled(false);
+        mainLabel.setText(finalWords);
+        for(var letterComponent : letterComponents) letterComponent.setAsInitialLetter();
+    }
+    
     private void verifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verifyButtonActionPerformed
         boolean isWordCorrect = true;
-        for(var c : this.letterComponents){
-            isWordCorrect = c.validateAnswer() && isWordCorrect;
-        }
-        if(isWordCorrect){
-            forfeitButton.setEnabled(false);
-            verifyButton.setEnabled(false);
-            mainLabel.setText("You've guessed it!");
-            if(seenWord == null) seenWord = new SeenWord(word, ResultEnum.GUESSED);
-            else seenWord.updateWordData(ResultEnum.GUESSED);
-        }
+        for(var c : this.letterComponents) isWordCorrect = c.validateAnswer() && isWordCorrect;
+        if(!isWordCorrect) return;
+        setFinalScreen("You've guessed it!");
+        if(seenWord == null) seenWord = new SeenWord(word, ResultEnum.GUESSED);
+        else seenWord.updateWordData(ResultEnum.GUESSED);
+        HibernateHandler.saveSeenWord(seenWord);
     }//GEN-LAST:event_verifyButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
@@ -171,12 +174,10 @@ public class GuessWordPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void forfeitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forfeitButtonActionPerformed
+        setFinalScreen("The answer was...");
         if(seenWord == null) seenWord = new SeenWord(word, ResultEnum.SURRENDERED);
         else seenWord.updateWordData(ResultEnum.SURRENDERED);
-        forfeitButton.setEnabled(false);
-        verifyButton.setEnabled(false);
-        mainLabel.setText("The answer was...");
-        for(var letterComponent : letterComponents) letterComponent.setAsInitialLetter();
+        HibernateHandler.saveSeenWord(seenWord);
     }//GEN-LAST:event_forfeitButtonActionPerformed
 
     private void printLetters(){

@@ -5,6 +5,7 @@
 package com.mycompany.vocabularymaster.Entities;
 
 import com.mycompany.vocabularymaster.utils.ResultEnum;
+import jakarta.persistence.Basic;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import java.time.LocalDate;
@@ -18,7 +19,9 @@ public final class SeenWord {
     
     @Id
     private String word;
+    @Basic
     private LocalDate lastTimeSeen;
+    @Basic
     private LocalDate revisionDay;
     private int daySpan;
     

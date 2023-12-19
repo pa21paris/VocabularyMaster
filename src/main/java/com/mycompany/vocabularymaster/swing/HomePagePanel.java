@@ -5,6 +5,7 @@
 package com.mycompany.vocabularymaster.swing;
 
 import com.mycompany.vocabularymaster.utils.ApiHandler;
+import com.mycompany.vocabularymaster.utils.HibernateHandler;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -34,35 +35,38 @@ public class HomePagePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        learnVocabularyButton = new javax.swing.JLabel();
+        reviseButton = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel1.setText("Vocabulary Master");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setText("Learn new vocabulary");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        learnVocabularyButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        learnVocabularyButton.setText("Learn new vocabulary");
+        learnVocabularyButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                learnVocabularyButtonMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel2MouseEntered(evt);
+                learnVocabularyButtonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel2MouseExited(evt);
+                learnVocabularyButtonMouseExited(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Revise");
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        reviseButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        reviseButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        reviseButton.setText("Revise");
+        reviseButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reviseButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel3MouseEntered(evt);
+                reviseButtonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel3MouseExited(evt);
+                reviseButtonMouseExited(evt);
             }
         });
 
@@ -77,8 +81,8 @@ public class HomePagePanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(111, 111, 111)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(reviseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(learnVocabularyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -87,32 +91,32 @@ public class HomePagePanel extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(50, 50, 50)
-                .addComponent(jLabel2)
+                .addComponent(learnVocabularyButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
+                .addComponent(reviseButton)
                 .addGap(30, 30, 30))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
-        jLabel2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        jLabel2.setForeground(Color.BLUE);
-    }//GEN-LAST:event_jLabel2MouseEntered
+    private void learnVocabularyButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_learnVocabularyButtonMouseEntered
+        learnVocabularyButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        learnVocabularyButton.setForeground(Color.BLUE);
+    }//GEN-LAST:event_learnVocabularyButtonMouseEntered
 
-    private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
-        jLabel2.setForeground(Color.BLACK);
-    }//GEN-LAST:event_jLabel2MouseExited
+    private void learnVocabularyButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_learnVocabularyButtonMouseExited
+        learnVocabularyButton.setForeground(Color.BLACK);
+    }//GEN-LAST:event_learnVocabularyButtonMouseExited
 
-    private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
-        jLabel3.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        jLabel3.setForeground(Color.BLUE);
-    }//GEN-LAST:event_jLabel3MouseEntered
+    private void reviseButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reviseButtonMouseEntered
+        reviseButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        reviseButton.setForeground(Color.BLUE);
+    }//GEN-LAST:event_reviseButtonMouseEntered
 
-    private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
-        jLabel3.setForeground(Color.BLACK);
-    }//GEN-LAST:event_jLabel3MouseExited
+    private void reviseButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reviseButtonMouseExited
+        reviseButton.setForeground(Color.BLACK);
+    }//GEN-LAST:event_reviseButtonMouseExited
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void learnVocabularyButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_learnVocabularyButtonMouseClicked
         var frame = (JFrame) SwingUtilities.getRoot(this);
         var contentPane = frame.getContentPane();
         var cardLayout = (CardLayout) contentPane.getLayout();
@@ -120,12 +124,22 @@ public class HomePagePanel extends javax.swing.JPanel {
         contentPane.add(new GuessWordPanel(word));
         cardLayout.next(contentPane);
         frame.pack();
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_learnVocabularyButtonMouseClicked
+
+    private void reviseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reviseButtonMouseClicked
+        var frame = (JFrame) SwingUtilities.getRoot(this);
+        var contentPane = frame.getContentPane();
+        var cardLayout = (CardLayout) contentPane.getLayout();
+        var word = HibernateHandler.getWordToRevise();
+        contentPane.add(new GuessWordPanel(word));
+        cardLayout.next(contentPane);
+        frame.pack();
+    }//GEN-LAST:event_reviseButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel learnVocabularyButton;
+    private javax.swing.JLabel reviseButton;
     // End of variables declaration//GEN-END:variables
 }
