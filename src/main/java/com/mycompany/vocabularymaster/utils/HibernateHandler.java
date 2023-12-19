@@ -7,6 +7,7 @@ package com.mycompany.vocabularymaster.utils;
 import com.mycompany.vocabularymaster.Entities.SeenWord;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,13 +42,14 @@ public class HibernateHandler {
         closeSession();
     }
     
-    public static SeenWord getWordToRevise(){
+    public static Optional<SeenWord> getWordToRevise(){
         openSession();
         List<SeenWord> results = session.createSelectionQuery(
-                "from SeenWord as sw where revisionDay = :revisionDay",
+                "from SeenWord as sw where revisionDay <= :today",
                 SeenWord.class)
-                .setParameter("revisionDay", LocalDate.now())
+                .setParameter("today", LocalDate.now())
                 .getResultList();
-        return results.get(new Random().nextInt(results.size()));
+        if(results.isEmpty()) return Optional.empty();
+        return Optional.of(results.get(new Random().nextInt(results.size())));
     }
 }

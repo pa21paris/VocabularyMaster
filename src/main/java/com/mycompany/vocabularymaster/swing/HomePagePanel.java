@@ -10,6 +10,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
@@ -131,9 +132,14 @@ public class HomePagePanel extends javax.swing.JPanel {
         var contentPane = frame.getContentPane();
         var cardLayout = (CardLayout) contentPane.getLayout();
         var word = HibernateHandler.getWordToRevise();
-        contentPane.add(new GuessWordPanel(word));
-        cardLayout.next(contentPane);
-        frame.pack();
+        if(word.isEmpty()) {
+            JOptionPane.showMessageDialog(frame, "There isn't any words to revise today","Confirm message", JOptionPane.PLAIN_MESSAGE);
+            
+        }else{
+            contentPane.add(new GuessWordPanel(word.get()));
+            cardLayout.next(contentPane);
+            frame.pack();
+        }
     }//GEN-LAST:event_reviseButtonMouseClicked
 
 
